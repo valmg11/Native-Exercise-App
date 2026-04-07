@@ -1,93 +1,47 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, Button, FlatList } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useCallback, useEffect, useRef } from 'react';
 
 const Stack = createNativeStackNavigator();
-let title = ["Exercise!", "Plank", "Running", "Push Ups", "Sit Ups", "Leg Press", "Chest Press"];
 
-function RepetitionExerciseScreen({onReturn, exercise}) {
-  const [isRunning, setIsRunning] = useState(false);
-  const [elapsedTime, setElapsedTime] = useState(0);
-  const intervalIdRef = useRef(null);
-  const startTimeRef = useRef(0);
-
-   useEffect (() => {
-        if(isRunning) {
-            intervalIdRef.current = setInterval(() => {
-                setElapsedTime(Date.now() - startTimeRef.current)
-            }, 10);
-        }
-        return () => {
-            clearInterval(intervalIdRef.current);
-        }
-    }, [isRunning]);
-    
-    function start() {
-        setIsRunning(true);
-        startTimeRef.current = Date.now() - elapsedTime;
-    }
-
-    // stops running and sets value to 0
-    function reset() {
-        setElapsedTime(0);
-        setIsRunning(false);
-    }
-
-    function formatTime() {
-        let mins = Math.floor(elapsedTime / (1000 * 60) % 60);
-        let secs = Math.floor(elapsedTime / (1000) % 60);
-        let millisecs = Math.floor(elapsedTime % 1000 / 10);
-
-        // add "0" padding to beginning
-        mins = String(mins).padStart(2, "0");
-        secs = String(secs).padStart(2, "0");
-        millisecs = String(millisecs).padStart(2, "0");
-
-        // display stopwatch
-        return `${mins}:${secs}:${millisecs}`
-    }
+function RepetitionExerciseScreen({route, navigation}) {
+   let goToExercise = useCallback(() => {
+    navigation.push("RepetitionExercise",  {name: "Push Ups", count: route.params.count+1})
+  })
 
     return (
       <View style={styles.container}>
-        {/* <Text>{formatTime()}</Text> */}
-        <Button title="Start"/>
-  
-          {/* reset/stop button */}
-          <Button title="Reset"/>
-  
-          {/* return button */}
-          <Button title="Return"/>
+        <Text>{route.params.name} : {route.params.count}</Text>
+        <Button onPress={goToExercise} title="Go to Screen"></Button>
+        <Button onPress={() => navigation.navigate("Home")} title="Return"></Button>
         <StatusBar style="auto" />
-
       </View>
     );
-  
-  // return (
-  //   <View style={styles.container}>
-  //       <Text>Repetition Exercise</Text>
-
-  //       <Button title="Start"></Button>
-
-  //       <Button title="Reset"></Button>
-
-  //       <Button title="Return"></Button>
-
-
-  //       <StatusBar style="auto" />
-  //     </View>
-  // )
 }
 
 function HomeScreen({navigation}) {
-  let goToExercise = useCallback(() => {
-    navigation.navigate("RepetitionExercise")
+  let exerciseList = [
+    {
+      name: "Ex1",
+      key: "1",
+    },
+    {
+      name: "Ex2",
+      key: "2",
+    }
+  ]
+  let goToExercise = useCallback(({name}) => {
+    navigation.navigate("RepetitionExercise",  {name: name, count: 0})
   })
   return (
       <View style={styles.container}>
-        <Text>{title[0]}</Text>
-        <Button onPress={goToExercise} title={title[1]}></Button>
+        <FlatList data={exerciseList} renderItem={({item}) =>
+          <Button onPress={() => goToExercise(item)} title={item.name}></Button>
+
+        }/>
+        {/* <Text>{title[0]}</Text> */}
         <StatusBar style="auto" />
       </View>
   )
@@ -107,7 +61,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'yellow',
+    backgroundColor: 'lightblue',
     alignItems: 'center',
     justifyContent: 'center',
   },
