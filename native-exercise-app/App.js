@@ -1,44 +1,42 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { useCallback } from 'react';
 
-export default function App() {
-  let title = ["Exercise!", "Plank", "Running", "Push Ups", "Sit Ups", "Leg Press", "Chest Press"];
+const Stack = createNativeStackNavigator();
+let title = ["Exercise!", "Plank", "Running", "Push Ups", "Sit Ups", "Leg Press", "Chest Press"];
+
+function RepetitionExerciseScreen({ navigation }) {
   return (
     <View style={styles.container}>
-      <Text>{title[0]}</Text>
-      <StatusBar style="auto" />
-
-      <View style={styles.container2}>
-        <Button 
-        color="red"
-        // style={styles.homeButtons}
-        title={title[1]}/>
-        <Button 
-        margin
-        style={styles.homeButtons}
-        title={title[2]}/>
-
-        <Button 
-        margin
-        style={styles.homeButtons}
-        title={title[3]}/>
-        <Button 
-        margin
-        style={styles.homeButtons}
-        title={title[4]}/>
-
-        <Button 
-        margin
-        style={styles.homeButtons}
-        title={title[5]}/>
-        <Button 
-        margin
-        style={styles.homeButtons}
-        title={title[6]}/>
+        <Text>Repetition Exercise</Text>
+        <StatusBar style="auto" />
       </View>
+  )
+}
 
-    </View>
-    
+function HomeScreen({navigation}) {
+  let goToExercise = useCallback(() => {
+    navigation.navigate("RepetitionExercise")
+  })
+  return (
+      <View style={styles.container}>
+        <Text>{title[0]}</Text>
+        <Button onPress={goToExercise} title={title[1]}></Button>
+        <StatusBar style="auto" />
+      </View>
+  )
+}
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={HomeScreen}/>
+        <Stack.Screen name="RepetitionExercise" component={RepetitionExerciseScreen}/>
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 

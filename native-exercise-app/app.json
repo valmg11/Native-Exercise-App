@@ -10,7 +10,10 @@
     "splash": {
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#ffffff",
+    "experiments": {
+      "baseUrl": "/native-exercise-app/"
+    }
     },
     "ios": {
       "supportsTablet": true
