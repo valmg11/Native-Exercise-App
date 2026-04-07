@@ -7,7 +7,7 @@ import { useCallback, useEffect, useRef } from 'react';
 const Stack = createNativeStackNavigator();
 let title = ["Exercise!", "Plank", "Running", "Push Ups", "Sit Ups", "Leg Press", "Chest Press"];
 
-function RepetitionExerciseScreen({ navigation }) {
+function RepetitionExerciseScreen({onReturn, exercise}) {
   const [isRunning, setIsRunning] = useState(false);
   const [elapsedTime, setElapsedTime] = useState(0);
   const intervalIdRef = useRef(null);
@@ -29,7 +29,7 @@ function RepetitionExerciseScreen({ navigation }) {
         startTimeRef.current = Date.now() - elapsedTime;
     }
 
-    //stops running and sets value to 0
+    // stops running and sets value to 0
     function reset() {
         setElapsedTime(0);
         setIsRunning(false);
@@ -50,15 +50,17 @@ function RepetitionExerciseScreen({ navigation }) {
     }
 
     return (
-      <View>
-        <Text>{formatTime()}</Text>
-        <Button title="Start" onPress={start}></Button>
+      <View style={styles.container}>
+        {/* <Text>{formatTime()}</Text> */}
+        <Button title="Start"/>
   
           {/* reset/stop button */}
-          <Button title="Reset" onPress={reset}></Button>
+          <Button title="Reset"/>
   
           {/* return button */}
-          <Button title="Return"></Button>
+          <Button title="Return"/>
+        <StatusBar style="auto" />
+
       </View>
     );
   
@@ -105,7 +107,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: 'yellow',
     alignItems: 'center',
     justifyContent: 'center',
   },
