@@ -8,20 +8,14 @@ import Plank from './components/Plank';
 
 const Stack = createNativeStackNavigator();
 
-function HomeScreen({navigation}) {
-  let exerciseList = [
-    {
-      name: "Plank",
-      key: "1",
-    },
-    {
-      name: "Push Ups",
-      key: "2",
-    }
-  ]
+function HomeScreen({navigation, route}) {
+  let exerciseList = route.params.exerciseList
+
   let goToExercise = useCallback(({key}) => {
-    navigation.navigate("Plank",  {exerciseKey: key, count: 0, exerciseList : exerciseList})
+    navigation.navigate("Plank",  {exerciseKey: key, count: 0})
   })
+  
+
   return (
       <View style={styles.container}>
         <FlatList data={exerciseList} renderItem={({item}) =>
@@ -33,11 +27,21 @@ function HomeScreen({navigation}) {
 }
 
 export default function App() {
+  let exerciseList = [
+    {
+      name: "Plank",
+      key: "1",
+    },
+    {
+      name: "Push Ups",
+      key: "2",
+    }
+  ]
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen}/>
-        <Stack.Screen name="Plank" component={Plank}/>
+        <Stack.Screen name="Home" component={HomeScreen} initialParams={{exerciseList: exerciseList}}/>
+        <Stack.Screen name="Plank" component={Plank} initialParams={{exerciseList: exerciseList}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
