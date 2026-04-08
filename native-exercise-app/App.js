@@ -2,45 +2,25 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button, FlatList } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+
+import Plank from './components/Plank';
 
 const Stack = createNativeStackNavigator();
-
-function RepetitionExerciseScreen({route, navigation}) {
-  let {exerciseList, exerciseKey} = route.params
-   let goToExercise = useCallback(() => {
-    navigation.push("RepetitionExercise",  {exerciseKey: "2", exerciseList : exerciseList, count: route.params.count+1})
-  })
-  let currentExercise = exerciseList.find(ex => ex.key === exerciseKey)
-
-  
-    return (
-      <View style={styles.container}>
-        <Text>{currentExercise.name} : {route.params.count}</Text>
-        <Button onPress={goToExercise} title="Go to Screen"></Button>
-        <Button onPress={() => navigation.reset({
-          key: "0",
-          routes: [{name: "Home"}],
-        })
-        } title="Return"></Button>
-        <StatusBar style="auto" />
-      </View>
-    );
-}
 
 function HomeScreen({navigation}) {
   let exerciseList = [
     {
-      name: "Ex1",
+      name: "Plank",
       key: "1",
     },
     {
-      name: "Ex2",
+      name: "Push Ups",
       key: "2",
     }
   ]
   let goToExercise = useCallback(({key}) => {
-    navigation.navigate("RepetitionExercise",  {exerciseKey: key, count: 0, exerciseList : exerciseList})
+    navigation.navigate("Plank",  {exerciseKey: key, count: 0, exerciseList : exerciseList})
   })
   return (
       <View style={styles.container}>
@@ -57,7 +37,7 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="Home" component={HomeScreen}/>
-        <Stack.Screen name="RepetitionExercise" component={RepetitionExerciseScreen}/>
+        <Stack.Screen name="Plank" component={Plank}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
