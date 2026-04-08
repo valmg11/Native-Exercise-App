@@ -7,15 +7,22 @@ import { useCallback, useEffect, useRef } from 'react';
 const Stack = createNativeStackNavigator();
 
 function RepetitionExerciseScreen({route, navigation}) {
+  let {exerciseList, exerciseKey} = route.params
    let goToExercise = useCallback(() => {
-    navigation.push("RepetitionExercise",  {name: "Push Ups", count: route.params.count+1})
+    navigation.push("RepetitionExercise",  {exerciseKey: "2", exerciseList : exerciseList, count: route.params.count+1})
   })
+  let currentExercise = exerciseList.find(ex => ex.key === exerciseKey)
 
+  
     return (
       <View style={styles.container}>
-        <Text>{route.params.name} : {route.params.count}</Text>
+        <Text>{currentExercise.name} : {route.params.count}</Text>
         <Button onPress={goToExercise} title="Go to Screen"></Button>
-        <Button onPress={() => navigation.navigate("Home")} title="Return"></Button>
+        <Button onPress={() => navigation.reset({
+          key: "0",
+          routes: [{name: "Home"}],
+        })
+        } title="Return"></Button>
         <StatusBar style="auto" />
       </View>
     );
@@ -32,16 +39,14 @@ function HomeScreen({navigation}) {
       key: "2",
     }
   ]
-  let goToExercise = useCallback(({name}) => {
-    navigation.navigate("RepetitionExercise",  {name: name, count: 0})
+  let goToExercise = useCallback(({key}) => {
+    navigation.navigate("RepetitionExercise",  {exerciseKey: key, count: 0, exerciseList : exerciseList})
   })
   return (
       <View style={styles.container}>
         <FlatList data={exerciseList} renderItem={({item}) =>
           <Button onPress={() => goToExercise(item)} title={item.name}></Button>
-
         }/>
-        {/* <Text>{title[0]}</Text> */}
         <StatusBar style="auto" />
       </View>
   )
