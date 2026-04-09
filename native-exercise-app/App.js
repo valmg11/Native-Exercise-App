@@ -5,26 +5,9 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import Plank from './components/Plank';
+import HomeScreen from './components/HomeScreen';
 
 const Stack = createNativeStackNavigator();
-
-function HomeScreen({navigation, route}) {
-  let exerciseList = route.params.exerciseList
-
-  let goToExercise = useCallback(({key}) => {
-    navigation.navigate("Plank",  {exerciseKey: key, count: 0})
-  })
-  
-
-  return (
-      <View style={styles.container}>
-        <FlatList data={exerciseList} renderItem={({item}) =>
-          <Button onPress={() => goToExercise(item)} title={item.name}></Button>
-        }/>
-        <StatusBar style="auto" />
-      </View>
-  )
-}
 
 export default function App() {
   let exerciseList = [
