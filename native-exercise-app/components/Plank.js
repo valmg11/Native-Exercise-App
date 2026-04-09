@@ -4,8 +4,6 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-// const Stack = createNativeStackNavigator();
-
 function Plank({route, navigation}) {
   let {exerciseList, exerciseKey} = route.params
    let goToExercise = useCallback(() => {
@@ -57,7 +55,7 @@ function Plank({route, navigation}) {
     return (
       <View style={styles.container}>
         <Text>{currentExercise.name} : {route.params.count}</Text>
-        <Button onPress={goToExercise} title="Suggested Exercise:"></Button>
+        <Button onPress={goToExercise} title="Suggested:"></Button>
         <Text>{formatTime()}</Text>
         <Button title="start" onPress={start}></Button>
         <Button title="reset" onPress={reset}></Button>

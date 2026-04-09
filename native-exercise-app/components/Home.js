@@ -7,13 +7,14 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 function HomeScreen({navigation, route}) {
   let exerciseList = route.params.exerciseList
 
-  let goToExercise = useCallback(({key}) => {
-    navigation.navigate("Plank",  {exerciseKey: key, count: 0})
+  let goToExercise = useCallback(({name, key}) => {
+    navigation.navigate(name,  {exerciseKey: key, count: 0})
   })
   
 
   return (
       <View style={styles.container}>
+        <Text>Exercise!</Text>
         <FlatList data={exerciseList} renderItem={({item}) =>
           <Button onPress={() => goToExercise(item)} title={item.name}></Button>
         }/>

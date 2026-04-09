@@ -4,8 +4,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
+import HomeScreen from './components/Home';
 import Plank from './components/Plank';
-import HomeScreen from './components/HomeScreen';
+import PushUps from './components/PushUps';
 
 const Stack = createNativeStackNavigator();
 
@@ -25,6 +26,7 @@ export default function App() {
       <Stack.Navigator>
         <Stack.Screen name="Home" component={HomeScreen} initialParams={{exerciseList: exerciseList}}/>
         <Stack.Screen name="Plank" component={Plank} initialParams={{exerciseList: exerciseList}}/>
+        <Stack.Screen name="Push Ups" component={PushUps} initialParams={{exerciseList: exerciseList}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
