@@ -2,7 +2,7 @@
   "name": "native-exercise-app",
   "version": "1.0.0",
   "main": "index.js",
-  "homepage": "https://valmg11.github.io/Native-Exercise-App",
+  "homepage": "https://valmg11.github.io/native-exercise-app",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
