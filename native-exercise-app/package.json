@@ -2,12 +2,14 @@
   "name": "native-exercise-app",
   "version": "1.0.0",
   "main": "index.js",
-  "homepage": "https://valmg11.github.io/native-exercise-app/",
+  "homepage": "https://valmg11.github.io/Native-Exercise-App/",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "predeploy": "expo export -p web",
+    "deploy": "gh-pages --nojekyll -d dist"
   },
   "dependencies": {
     "@react-navigation/native": "^7.2.2",
@@ -21,5 +23,8 @@
     "react-native-screens": "~4.16.0",
     "react-native-web": "^0.21.0"
   },
-  "private": false
+  "private": false,
+  "devDependencies": {
+    "gh-pages": "^6.3.0"
+  }
 }
