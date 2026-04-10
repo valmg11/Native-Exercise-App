@@ -6,10 +6,10 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 
 // const Stack = createNativeStackNavigator();
 
-function PushUps({route, navigation}) {
+function SitUps({route, navigation}) {
   let {exerciseList, exerciseKey} = route.params
    let goToExercise = useCallback(() => {
-    navigation.push("Plank",  {exerciseKey: "1", exerciseList})
+    navigation.push("Plank",  {exerciseKey: "1", exerciseList : exerciseList, count: route.params.count+1})
   })
   let currentExercise = exerciseList.find(ex => ex.key === exerciseKey)
 
@@ -23,17 +23,17 @@ function PushUps({route, navigation}) {
         <Text style={styles.text}>{count}</Text>
 
         <View style={styles.buttons}>
-          <Button title="Complete Rep" onPress={() => setCount(count + 1)}></Button>
+            <Button title="Complete Rep" onPress={() => setCount(count + 1)}></Button>
         </View>
         <View style={styles.buttons}>
-          <Button title="Reset" onPress={() => setCount(0)}></Button>
+            <Button title="Reset" onPress={() => setCount(0)}></Button>
         </View>
         <View style={styles.homeButton}>
-          <Button onPress={() => navigation.reset({
+            <Button onPress={() => navigation.reset({
             key: "0",
             routes: [{name: "Home"}],
-          })
-          } title="Return"></Button>
+            })
+            } title="Return"></Button>
         </View>
         <StatusBar style="auto" />
       </View>
@@ -64,4 +64,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default PushUps
+export default SitUps

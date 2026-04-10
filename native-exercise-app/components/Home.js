@@ -14,9 +14,11 @@ function HomeScreen({navigation, route}) {
 
   return (
       <View style={styles.container}>
-        <Text>Exercise!</Text>
+        <Text style={styles.header}>Exercise!</Text>
         <FlatList data={exerciseList} renderItem={({item}) =>
+        <View style={styles.buttons}>
           <Button onPress={() => goToExercise(item)} title={item.name}></Button>
+        </View>
         }/>
         <StatusBar style="auto" />
       </View>
@@ -30,10 +32,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  homeButtons: {
-    color: "red",
-    marginTop: 10,
+  header: {
+    fontSize: 30,
+    marginBottom: 20,
+    marginTop: 270,
   },
+  buttons: {
+    marginBottom: 20,
+  }
 });
 
 export default HomeScreen

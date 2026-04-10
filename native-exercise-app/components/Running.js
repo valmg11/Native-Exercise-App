@@ -4,10 +4,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-function Plank({route, navigation}) {
+function Running({route, navigation}) {
   let {exerciseList, exerciseKey} = route.params
    let goToExercise = useCallback(() => {
-    navigation.push("Running",  {exerciseKey: "2", exerciseList})
+    navigation.push("Push Ups",  {exerciseKey: "3", exerciseList})
   })
   let currentExercise = exerciseList.find(ex => ex.key === exerciseKey)
 
@@ -56,23 +56,22 @@ function Plank({route, navigation}) {
       <View style={styles.container}>
         <Text style={styles.header}>{currentExercise.name}</Text>
 
-        <Button onPress={goToExercise} title="Suggested: Running"></Button>
+        <Button onPress={goToExercise} title="Suggested: Push Ups"></Button>
         <Text style={styles.text}>{formatTime()}</Text>
 
         <View style={styles.buttons}>
-          <Button title="start" onPress={start}></Button>
+            <Button title="start" onPress={start}></Button>
         </View>
         <View style={styles.buttons}>
-          <Button title="reset" onPress={reset}></Button>
+            <Button title="reset" onPress={reset}></Button>
         </View>
         <View style={styles.homeButton}>
-          <Button onPress={() => navigation.reset({
+            <Button onPress={() => navigation.reset({
             key: "0",
             routes: [{name: "Home"}],
-          })
-          } title="Return"></Button>
+            })
+            } title="Return"></Button>
         </View>
-
 
         <StatusBar style="auto" />
       </View>
@@ -103,4 +102,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Plank
+export default Running
