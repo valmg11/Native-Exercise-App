@@ -12,7 +12,7 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff",
     "experiments": {
-      "baseUrl": "/native-exercise-app"
+      "baseUrl": "/Native-Exercise-App"
     }
     },
     "ios": {
