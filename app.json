@@ -7,13 +7,13 @@
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
+    "experiments": {
+      "baseUrl": "/Native-Exercise-App/native-exercise-app/"
+    },
     "splash": {
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff",
-    "experiments": {
-      "baseUrl": "/Native-Exercise-App/native-exercise-app"
-    }
+      "backgroundColor": "#ffffff"
     },
     "ios": {
       "supportsTablet": true
