@@ -3,14 +3,14 @@ import { StyleSheet, Text, View, Button } from 'react-native';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 function Running({route, navigation}) {
-  let {exerciseList, exerciseKey} = route.params
+  let {exerciseList, exerciseKey} = route.params;
    let goToExercise = useCallback(() => {
     // add suggested exercise screen
-    navigation.push("Sit Ups",  {exerciseKey: "4", exerciseList})
+    navigation.push("Sit Ups",  {exerciseKey: "4", exerciseList});
   })
-  let currentExercise = exerciseList.find(ex => ex.key === exerciseKey)
+  let currentExercise = exerciseList.find(ex => ex.key === exerciseKey);
 
-  // stopwatch from exercise app
+  // stopwatch
   const [isRunning, setIsRunning] = useState(false);
   const [elapsedTime, setElapsedTime] = useState(0);
   const intervalIdRef = useRef(null);
@@ -32,7 +32,12 @@ function Running({route, navigation}) {
         startTimeRef.current = Date.now() - elapsedTime;
     }
 
-    //stops running and sets value to 0
+    // stops
+    function stop() {
+        setIsRunning(false);
+    }
+
+    //resets to 0
     function reset() {
         setElapsedTime(0);
         setIsRunning(false);
@@ -56,14 +61,19 @@ function Running({route, navigation}) {
       <View style={styles.container}>
         <Text style={styles.header}>{currentExercise.name}</Text>
 
+        {/* suggested exercise */}
         <Button onPress={goToExercise} title="Suggested: Sit Ups" color="#4e92d3"></Button>
         <Text style={styles.text}>{formatTime()}</Text>
 
+        {/* stopwatch */}
         <View style={styles.buttons}>
-            <Button title="start" onPress={start} color="#4e92d3"></Button>
+          <Button title="start" onPress={start} color="#4e92d3"></Button>
         </View>
         <View style={styles.buttons}>
-            <Button title="reset" onPress={reset} color="#4e92d3"></Button>
+          <Button title="stop" onPress={stop} color="#4e92d3"></Button>
+        </View>
+        <View style={styles.buttons}>
+          <Button title="reset" onPress={reset} color="#4e92d3"></Button>
         </View>
 
         {/* home button */}
@@ -74,7 +84,6 @@ function Running({route, navigation}) {
             })
             } title="Home" color="#092C56"></Button>
         </View>
-
         <StatusBar style="auto" />
       </View>
     );

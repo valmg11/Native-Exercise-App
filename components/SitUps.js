@@ -5,28 +5,30 @@ import { useCallback, useState } from 'react';
 // const Stack = createNativeStackNavigator();
 
 function SitUps({route, navigation}) {
-  let {exerciseList, exerciseKey} = route.params
+  let {exerciseList, exerciseKey} = route.params;
    let goToExercise = useCallback(() => {
     // add suggested exercise screen
-    navigation.push("Plank",  {exerciseKey: "1", exerciseList})
+    navigation.push("Plank",  {exerciseKey: "1", exerciseList});
   })
-  let currentExercise = exerciseList.find(ex => ex.key === exerciseKey)
+  let currentExercise = exerciseList.find(ex => ex.key === exerciseKey);
 
-  // counter from exercise app
+  // counter
   const [count, setCount] = useState(0);
 
     return (
       <View style={styles.container}>
         <Text style={styles.header}>{currentExercise.name}</Text>
 
+        {/* suggested exercise */}
         <Button onPress={goToExercise} title="Suggested: Plank" color="#4e92d3"></Button>
         <Text style={styles.text}>{count}</Text>
 
+        {/* rep buttons */}
         <View style={styles.buttons}>
-            <Button title="Complete Rep" onPress={() => setCount(count + 1)} color="#4e92d3"></Button>
+          <Button title="Complete Rep" onPress={() => setCount(count + 1)} color="#4e92d3"></Button>
         </View>
         <View style={styles.buttons}>
-            <Button title="Reset" onPress={() => setCount(0)} color="#4e92d3"></Button>
+          <Button title="Reset" onPress={() => setCount(0)} color="#4e92d3"></Button>
         </View>
 
         {/* home button */}

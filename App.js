@@ -1,8 +1,7 @@
-import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import HomeScreen from './components/Home';
+import Home from './components/Home';
 import Plank from './components/Plank';
 import PushUps from './components/PushUps';
 import Running from './components/Running';
@@ -33,25 +32,17 @@ export default function App() {
     },
   ]
   return (
+    // screens
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen} initialParams={{exerciseList: exerciseList}}/>
+        <Stack.Screen name="Home" component={Home} initialParams={{exerciseList}}/>
 
-        <Stack.Screen name="Plank" component={Plank} initialParams={{exerciseList: exerciseList}}/>
-        <Stack.Screen name="Running" component={Running} initialParams={{exerciseList: exerciseList}}/>
+        <Stack.Screen name="Plank" component={Plank} initialParams={{exerciseList}}/>
+        <Stack.Screen name="Running" component={Running} initialParams={{exerciseList}}/>
 
-        <Stack.Screen name="Push Ups" component={PushUps} initialParams={{exerciseList: exerciseList}}/>
-        <Stack.Screen name="Sit Ups" component={SitUps} initialParams={{exerciseList: exerciseList}}/>
+        <Stack.Screen name="Push Ups" component={PushUps} initialParams={{exerciseList}}/>
+        <Stack.Screen name="Sit Ups" component={SitUps} initialParams={{exerciseList}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'lightblue',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

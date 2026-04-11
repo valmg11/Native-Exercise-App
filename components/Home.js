@@ -2,16 +2,17 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button, FlatList } from 'react-native';
 import { useCallback } from 'react';
 
-function HomeScreen({navigation, route}) {
-  let exerciseList = route.params.exerciseList
+function Home({navigation, route}) {
+  let exerciseList = route.params.exerciseList;
 
   // call exercise
   let goToExercise = useCallback(({name, key}) => {
-    navigation.navigate(name,  {exerciseKey: key, count: 0})
+    navigation.navigate(name,  {exerciseKey: key, count: 0});
   })
   
 
   return (
+    // exercise buttons
       <View style={styles.container}>
         <Text style={styles.header}>Exercise!</Text>
         <FlatList data={exerciseList} renderItem={({item}) =>
@@ -43,4 +44,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default HomeScreen
+export default Home
