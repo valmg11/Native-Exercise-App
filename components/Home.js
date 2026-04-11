@@ -1,12 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button, FlatList } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback } from 'react';
 
 function HomeScreen({navigation, route}) {
   let exerciseList = route.params.exerciseList
 
+  // call exercise
   let goToExercise = useCallback(({name, key}) => {
     navigation.navigate(name,  {exerciseKey: key, count: 0})
   })
@@ -16,9 +15,9 @@ function HomeScreen({navigation, route}) {
       <View style={styles.container}>
         <Text style={styles.header}>Exercise!</Text>
         <FlatList data={exerciseList} renderItem={({item}) =>
-        <View style={styles.buttons}>
-          <Button onPress={() => goToExercise(item)} title={item.name}></Button>
-        </View>
+          <View style={styles.buttons}>
+            <Button onPress={() => goToExercise(item)} title={item.name} color="#4e92d3"></Button>
+          </View>
         }/>
         <StatusBar style="auto" />
       </View>
@@ -28,12 +27,14 @@ function HomeScreen({navigation, route}) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'lightblue',
+    backgroundColor: '#A9CBE0',
     alignItems: 'center',
     justifyContent: 'center',
   },
   header: {
     fontSize: 30,
+    fontFamily: "Verdana",
+    color: "#092C56",
     marginBottom: 20,
     marginTop: 270,
   },

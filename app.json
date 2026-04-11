@@ -8,7 +8,7 @@
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "experiments": {
-      "baseUrl": "/Native-Exercise-App/native-exercise-app/"
+      "baseUrl": "/Native-Exercise-App/"
     },
     "splash": {
       "image": "./assets/splash-icon.png",

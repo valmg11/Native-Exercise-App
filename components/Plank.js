@@ -1,16 +1,16 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button, FlatList } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { StyleSheet, Text, View, Button } from 'react-native';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 function Plank({route, navigation}) {
   let {exerciseList, exerciseKey} = route.params
    let goToExercise = useCallback(() => {
-    navigation.push("Running",  {exerciseKey: "2", exerciseList})
+    // add suggested exercise screen
+    navigation.push("Push Ups",  {exerciseKey: "3", exerciseList})
   })
   let currentExercise = exerciseList.find(ex => ex.key === exerciseKey)
 
+  // stopwatch from exercise app
   const [isRunning, setIsRunning] = useState(false);
   const [elapsedTime, setElapsedTime] = useState(0);
   const intervalIdRef = useRef(null);
@@ -56,21 +56,23 @@ function Plank({route, navigation}) {
       <View style={styles.container}>
         <Text style={styles.header}>{currentExercise.name}</Text>
 
-        <Button onPress={goToExercise} title="Suggested: Running"></Button>
+        <Button onPress={goToExercise} title="Suggested: Push Ups" color="#4e92d3"></Button>
         <Text style={styles.text}>{formatTime()}</Text>
 
         <View style={styles.buttons}>
-          <Button title="start" onPress={start}></Button>
+          <Button title="start" onPress={start} color="#4e92d3"></Button>
         </View>
         <View style={styles.buttons}>
-          <Button title="reset" onPress={reset}></Button>
+          <Button title="reset" onPress={reset} color="#4e92d3"></Button>
         </View>
+
+        {/* home button */}
         <View style={styles.homeButton}>
           <Button onPress={() => navigation.reset({
             key: "0",
             routes: [{name: "Home"}],
           })
-          } title="Return"></Button>
+          } title="Home" color="#092C56"></Button>
         </View>
 
 
@@ -82,18 +84,22 @@ function Plank({route, navigation}) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'lightblue',
+    backgroundColor: '#A9CBE0',
     alignItems: 'center',
     justifyContent: 'center',
   },
   header: {
     fontSize: 30,
+    fontFamily: "Verdana",
+    color: "#092C56",
     marginBottom: 20,
   },
   text: {
     marginTop: 15,
     marginBottom: 15,
     fontSize: 25,
+    color: "#092C56",
+    fontFamily: "Verdana",
   },
   buttons: {
     marginBottom: 10,
